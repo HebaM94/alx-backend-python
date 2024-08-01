@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Define and annotated variables module """
+"""  Annotated list of floats module """
 from typing import List
 
 
