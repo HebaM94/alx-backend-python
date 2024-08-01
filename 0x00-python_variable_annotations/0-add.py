@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" Annotated summation module
-"""
+""" Annotated summation module"""
 
 
 def add(a: float, b: float) -> float:
