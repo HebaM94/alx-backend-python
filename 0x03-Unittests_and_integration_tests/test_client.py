@@ -3,7 +3,7 @@
 """
 import unittest
 from parameterized import parameterized
-from unittest.mock import patch, Mock, PropertyMock
+from unittest.mock import patch, Mock, PropertyMock, MagicMock
 from client import GithubOrgClient
 
 
@@ -54,6 +54,17 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(result, ["repo1", "repo2", "repo3"])
             mock_repos_payload.assert_called_once()
             mock_get_json.assert_not_called()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+        ({}, "my_license", False),  # Case where the repo has no license information
+    ])
+    def test_has_license(self, repo, license_key, expected):
+        """Test the `has_license` method of `GithubOrgClient`
+        with different inputs"""
+        result = GithubOrgClient.has_license(repo, license_key)
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
