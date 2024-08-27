@@ -78,6 +78,7 @@ class TestGithubOrgClient(unittest.TestCase):
     },
 ])
 class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """Integration tests for the `GithubOrgClient` class"""
     @classmethod
     def setUpClass(cls):
         """Set up patching for requests.get."""
