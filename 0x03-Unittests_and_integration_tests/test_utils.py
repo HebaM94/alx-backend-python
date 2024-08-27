@@ -61,15 +61,15 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
 
         test_object = TestClass()
-        test_object.a_method = MagicMock(return_value=42)
+        with patch.object(test_object, 'a_method', return_value=42)\
+                as mock_method:
+            result1 = test_object.a_property
+            result2 = test_object.a_property
 
-        result1 = test_object.a_property
-        result2 = test_object.a_property
+            self.assertEqual(result1, 42)
+            self.assertEqual(result2, 42)
 
-        self.assertEqual(result1, 42)
-        self.assertEqual(result2, 42)
-
-        test_object.a_method.assert_called_once()
+            test_object.a_method.assert_called_once()
 
 
 if __name__ == '__main__':
